@@ -70,9 +70,10 @@ public class MainActivity extends AppCompatActivity {
                     // On vérifie que la Checkbox sélectionnée est la deuxième à l'aide de son identifiant
                     if (group.getCheckedRadioButtonId() == R.id.radio_centimetre) tValue = tValue / 100;
                     float imc = pValue / (tValue * tValue);
+
                     String resultat="Votre IMC est " + imc+" . ";
 
-                    if(commentaire.isChecked()) resultat += interpreteIMC(imc);
+                    if(commentaire.isChecked()) resultat += interpreteIMC(imc) + ".";
 
                     result.setText(resultat);
                 }
@@ -81,8 +82,23 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private String interpreteIMC(float imc) {
+        if (imc < 16.5) {
+            return "Famine";
+        } else if (imc >= 16.5 && imc < 18.5) {
+            return "Maigreur";
+        } else if (imc >= 18.5 && imc < 25) {
+            return "Corpulence normale";
+        } else if (imc >= 25 && imc < 30) {
+            return "Surpoids";
+        } else if (imc >= 30 && imc < 35) {
+            return "Obésité modérée";
+        } else if (imc >= 35 && imc < 40) {
+            return "Obésité sévère";
+        } else{
+            return "Obésité morbide ou massive";
+        }
 
-    };
+    }
 
     private View.OnClickListener resetListener = new View.OnClickListener() {
 
